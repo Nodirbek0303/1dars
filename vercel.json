@@ -1,5 +1,3 @@
 {
-  "version": 2,
-  "name": "belleza",
-  "public": true
+  "cleanUrls": true
 }
