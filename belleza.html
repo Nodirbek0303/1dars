@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belleza — Zamonaviy ayollar kiyimlari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose:#E14D6A;
+    --rose-dark:#C73657;
+    --rose-light:#F9DCE1;
+    --pink-bg:#FDF1EE;
+    --cream:#FFFBF9;
+    --ink:#2B2226;
+    --muted:#8A797D;
+    --line:#F0DEDD;
+    --gold:#C9A47E;
+    --green:#3CAA5D;
+    --red:#E23B4E;
+    --radius:14px;
+    --shadow: 0 10px 30px rgba(43,34,38,.06);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',sans-serif; color:var(--ink); background:var(--cream); -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.display{font-family:'Playfair Display',serif;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+  .container{max-width:1240px; margin:0 auto; padding:0 32px;}
+  .page{display:none;}
+  .page.active{display:block; animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  /* ---------- HEADER ---------- */
+  header{position:sticky; top:0; z-index:50; background:rgba(255,251,249,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; height:76px;}
+  .logo{display:flex; align-items:center; gap:8px; font-weight:800; font-size:22px; letter-spacing:.2px;}
+  .logo-mark{width:30px; height:30px; display:flex; align-items:center; justify-content:center;}
+  nav.main-links{display:flex; gap:34px;}
+  nav.main-links a{font-weight:600; font-size:15px; color:var(--ink); position:relative; padding:6px 0; transition:color .2s;}
+  nav.main-links a:hover{color:var(--rose);}
+  nav.main-links a.active{color:var(--rose);}
+  nav.main-links a.active::after{content:''; position:absolute; left:0; right:0; bottom:-4px; height:2px; background:var(--rose); border-radius:2px;}
+  .nav-icons{display:flex; align-items:center; gap:20px;}
+  .icon-btn{position:relative; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:transparent; transition:background .2s;}
+  .icon-btn:hover{background:var(--rose-light);}
+  .icon-btn svg{width:19px; height:19px; stroke:var(--ink); fill:none; stroke-width:1.8;}
+  .badge-count{position:absolute; top:-2px; right:-2px; background:var(--rose); color:#fff; font-size:10px; font-weight:700; min-width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; padding:0 3px;}
+  .burger{display:none;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 28px; border-radius:10px; font-weight:700; font-size:14.5px; transition:all .2s; white-space:nowrap;}
+  .btn-primary{background:var(--rose); color:#fff;}
+  .btn-primary:hover{background:var(--rose-dark); transform:translateY(-1px);}
+  .btn-outline{background:#fff; color:var(--ink); border:1.5px solid var(--line);}
+  .btn-outline:hover{border-color:var(--rose); color:var(--rose);}
+  .btn-sm{padding:9px 16px; font-size:13px;}
+  .btn-block{width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{background:linear-gradient(120deg,#FDF1EE 45%,#FCE6E9 100%); padding:64px 0 56px; overflow:hidden;}
+  .hero-grid{display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:40px;}
+  .eyebrow{color:var(--rose); font-weight:700; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;}
+  .hero h1{font-size:52px; line-height:1.1; font-weight:700; color:var(--ink);}
+  .hero h1 span{color:var(--rose);}
+  .hero p{margin-top:18px; color:var(--muted); font-size:16px; max-width:420px; line-height:1.6;}
+  .hero .btn{margin-top:28px;}
+  .hero-visual{position:relative; display:flex; justify-content:center;}
+  .hero-circle{position:absolute; width:380px; height:380px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #F7C9CF, #F3B0BA); z-index:0;}
+  .hero-visual img{position:relative; z-index:1; width:340px; border-radius:20px; box-shadow:var(--shadow);}
+
+  .benefits-row{display:grid; grid-template-columns:repeat(4,1fr); gap:24px; padding:48px 0; border-bottom:1px solid var(--line);}
+  .benefit{display:flex; align-items:center; gap:14px;}
+  .benefit-icon{width:46px; height:46px; border-radius:50%; background:var(--rose-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .benefit-icon svg{width:22px; height:22px; stroke:var(--rose); fill:none; stroke-width:1.7;}
+  .benefit strong{display:block; font-size:14px;}
+  .benefit span{font-size:12.5px; color:var(--muted);}
+
+  /* ---------- SECTIONS ---------- */
+  .section{padding:56px 0;}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px;}
+  .section-head h2{font-size:30px; font-weight:700;}
+  .section-head .link-more{color:var(--rose); font-weight:700; font-size:14px;}
+
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:22px;}
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+
+  .card{background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); transition:transform .25s, box-shadow .25s; cursor:pointer; border:1px solid var(--line);}
+  .card:hover{transform:translateY(-5px); box-shadow:0 16px 34px rgba(43,34,38,.1);}
+  .card-media{position:relative; aspect-ratio:3/4; overflow:hidden; background:#f2e6e3;}
+  .card-media img{width:100%; height:100%; object-fit:cover; transition:transform .4s;}
+  .card:hover .card-media img{transform:scale(1.05);}
+  .tag{position:absolute; top:12px; left:12px; padding:5px 11px; border-radius:100px; font-size:11px; font-weight:800; color:#fff; letter-spacing:.3px;}
+  .tag.new{background:var(--green);}
+  .tag.sale{background:var(--red);}
+  .fav-btn{position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.9); display:flex; align-items:center; justify-content:center;}
+  .fav-btn svg{width:16px; height:16px; stroke:var(--ink); fill:none; stroke-width:1.8;}
+  .fav-btn.active svg{fill:var(--rose); stroke:var(--rose);}
+  .card-body{padding:16px;}
+  .card-body h3{font-size:15px; font-weight:600; margin-bottom:6px;}
+  .price-row{display:flex; align-items:center; justify-content:space-between;}
+  .price{font-weight:800; font-size:15.5px;}
+  .price.discounted{color:var(--rose);}
+  .old-price{color:var(--muted); text-decoration:line-through; font-size:12.5px; margin-left:6px; font-weight:500;}
+
+  /* ---------- PROMO BANNER ---------- */
+  .promo{background:linear-gradient(120deg,var(--rose) 0%,var(--rose-dark) 100%); border-radius:20px; padding:44px 48px; display:flex; align-items:center; justify-content:space-between; color:#fff; margin:56px 0; position:relative; overflow:hidden;}
+  .promo::after{content:''; position:absolute; right:-40px; top:-40px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,.08);}
+  .promo h2{font-size:28px; margin-bottom:6px;}
+  .promo p{opacity:.85; font-size:14px;}
+  .promo .btn-outline{background:#fff; color:var(--rose-dark); border:none;}
+
+  footer{background:#241B1E; color:#EDE3E5; padding:56px 0 24px; margin-top:40px;}
+  .footer-grid{display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:32px; padding-bottom:36px;}
+  .footer-grid h4{margin-bottom:16px; font-size:14px; letter-spacing:.5px;}
+  .footer-grid li{margin-bottom:10px; font-size:13.5px; color:#B7A9AC;}
+  .footer-grid p{color:#B7A9AC; font-size:13.5px; line-height:1.7; max-width:280px;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.1); padding-top:20px; text-align:center; font-size:12.5px; color:#8A797D;}
+
+  /* ---------- PRODUCTS PAGE ---------- */
+  .breadcrumb{color:var(--muted); font-size:13px; margin-top:6px;}
+  .breadcrumb a{color:var(--muted);}
+  .page-title{font-size:32px; font-weight:700; margin:26px 0 4px;}
+  .products-layout{display:grid; grid-template-columns:250px 1fr; gap:36px; padding:32px 0 60px;}
+  .filter-block{margin-bottom:28px;}
+  .filter-block h4{font-size:14px; margin-bottom:14px; font-weight:700;}
+  .cat-item{display:flex; justify-content:space-between; padding:8px 0; font-size:14px; color:var(--muted); cursor:pointer;}
+  .cat-item:hover{color:var(--ink);}
+  .cat-item.active{color:var(--rose); font-weight:700;}
+  input[type=range]{width:100%; accent-color:var(--rose);}
+  .range-labels{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-top:6px;}
+  .swatches{display:flex; gap:10px;}
+  .swatch{width:26px; height:26px; border-radius:50%; border:2px solid transparent; cursor:pointer;}
+  .swatch.selected{border-color:var(--ink);}
+  .sizes{display:flex; flex-wrap:wrap; gap:8px;}
+  .size-chip{padding:7px 13px; border:1.5px solid var(--line); border-radius:8px; font-size:13px; cursor:pointer; transition:.2s;}
+  .size-chip.selected, .size-chip:hover{border-color:var(--rose); color:var(--rose);}
+  .results-bar{display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;}
+  .results-bar span{color:var(--muted); font-size:14px;}
+  select.sort-select{padding:10px 14px; border-radius:8px; border:1.5px solid var(--line); font-size:13.5px; background:#fff;}
+  .pagination{display:flex; justify-content:center; gap:8px; margin-top:36px;}
+  .page-btn{width:36px; height:36px; border-radius:8px; border:1.5px solid var(--line); background:#fff; font-weight:600; font-size:14px; display:flex; align-items:center; justify-content:center;}
+  .page-btn.active{background:var(--rose); color:#fff; border-color:var(--rose);}
+
+  /* ---------- PRODUCT DETAIL ---------- */
+  .detail-grid{display:grid; grid-template-columns:100px 1fr 1fr; gap:24px; padding:32px 0 20px;}
+  .thumbs{display:flex; flex-direction:column; gap:12px;}
+  .thumb{border-radius:10px; overflow:hidden; border:2px solid transparent; cursor:pointer; aspect-ratio:3/4;}
+  .thumb.selected{border-color:var(--rose);}
+  .main-image{border-radius:16px; overflow:hidden; aspect-ratio:3/4; background:#f2e6e3;}
+  .main-image img{width:100%; height:100%; object-fit:cover;}
+  .detail-info h1{font-size:26px; margin-bottom:8px;}
+  .rating{color:var(--gold); font-size:14px; display:flex; align-items:center; gap:6px; margin-bottom:14px;}
+  .rating span{color:var(--muted);}
+  .detail-price{font-size:28px; font-weight:800; color:var(--ink); margin-bottom:16px;}
+  .detail-price .old-price{font-size:16px;}
+  .detail-desc{color:var(--muted); font-size:14.5px; line-height:1.7; margin-bottom:22px;}
+  .opt-block{margin-bottom:20px;}
+  .opt-block h4{font-size:13px; font-weight:700; margin-bottom:10px; text-transform:uppercase; letter-spacing:.4px; color:var(--muted);}
+  .qty-control{display:flex; align-items:center; gap:14px; border:1.5px solid var(--line); border-radius:10px; width:fit-content; padding:6px 8px;}
+  .qty-control button{width:28px; height:28px; border-radius:6px; background:var(--rose-light); font-weight:700; font-size:16px;}
+  .action-row{display:flex; gap:12px; margin-top:26px;}
+  .detail-benefits{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:32px; padding-top:28px; border-top:1px solid var(--line);}
+  .spec-table{width:100%; border-collapse:collapse; margin-top:14px;}
+  .spec-table td{padding:10px 0; border-bottom:1px solid var(--line); font-size:13.5px;}
+  .spec-table td:first-child{color:var(--muted); width:45%;}
+  .lower-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; padding:44px 0 60px;}
+  .lower-grid h3{font-size:19px; margin-bottom:14px;}
+  .similar-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+
+  /* ---------- CART PAGE ---------- */
+  .cart-layout{display:grid; grid-template-columns:1.7fr 1fr; gap:32px; padding:32px 0 60px; align-items:start;}
+  table.cart-table{width:100%; border-collapse:collapse; background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);}
+  table.cart-table th{text-align:left; padding:16px 18px; font-size:12.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--muted); border-bottom:1px solid var(--line);}
+  table.cart-table td{padding:16px 18px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:middle;}
+  .cart-product{display:flex; align-items:center; gap:12px;}
+  .cart-product img{width:56px; height:70px; object-fit:cover; border-radius:8px;}
+  .qty-mini{display:flex; align-items:center; gap:10px; border:1.5px solid var(--line); border-radius:8px; padding:4px 8px; width:fit-content;}
+  .qty-mini button{width:22px; height:22px; background:var(--rose-light); border-radius:5px; font-weight:700;}
+  .remove-btn{color:var(--muted); font-size:18px;}
+  .summary-card{background:#fff; border-radius:var(--radius); padding:26px; box-shadow:var(--shadow);}
+  .summary-card h3{font-size:17px; margin-bottom:18px;}
+  .summary-row{display:flex; justify-content:space-between; font-size:14px; padding:10px 0; color:var(--muted);}
+  .summary-row.total{color:var(--ink); font-weight:800; font-size:16px; border-top:1px solid var(--line); margin-top:8px; padding-top:16px;}
+  .empty-state{text-align:center; padding:70px 20px; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);}
+  .empty-state svg{width:52px; height:52px; stroke:var(--muted); margin-bottom:16px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-layout{display:grid; grid-template-columns:1fr 1.3fr; gap:44px; padding:32px 0 60px;}
+  .contact-info-item{display:flex; gap:16px; margin-bottom:26px;}
+  .contact-info-item .ic{width:44px; height:44px; border-radius:12px; background:var(--rose-light); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .contact-info-item .ic svg{width:20px; height:20px; stroke:var(--rose); fill:none; stroke-width:1.7;}
+  .contact-info-item strong{display:block; font-size:14.5px; margin-bottom:3px;}
+  .contact-info-item span{color:var(--muted); font-size:13.5px; line-height:1.6;}
+  .form-card{background:#fff; border-radius:var(--radius); padding:30px; box-shadow:var(--shadow);}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:7px;}
+  .field input, .field textarea{width:100%; padding:13px 15px; border:1.5px solid var(--line); border-radius:10px; font-size:14px; font-family:inherit; resize:vertical;}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--rose);}
+  .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:14px 24px; border-radius:10px; font-size:14px; font-weight:600; opacity:0; pointer-events:none; transition:all .3s; z-index:200;}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;}
+    .hero h1{font-size:38px;}
+    .benefits-row{grid-template-columns:repeat(2,1fr);}
+    .grid-4{grid-template-columns:repeat(2,1fr);}
+    .grid-3{grid-template-columns:repeat(2,1fr);}
+    .products-layout{grid-template-columns:1fr;}
+    .detail-grid{grid-template-columns:1fr; }
+    .thumbs{flex-direction:row; order:2;}
+    .lower-grid{grid-template-columns:1fr;}
+    .cart-layout{grid-template-columns:1fr;}
+    .contact-layout{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    nav.main-links{display:none;}
+    .burger{display:flex;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <a href="#home" class="logo" onclick="navigate('home')">
+      <span class="logo-mark">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#E14D6A" stroke-width="1.6"><path d="M9 3l3 3 3-3M9 3c0 3-1 4-3 6l-3 12h18l-3-12c-2-2-3-3-3-6"/></svg>
+      </span>
+      Belleza
+    </a>
+    <nav class="main-links" id="mainNav">
+      <a href="#home" onclick="navigate('home')" data-nav="home">Bosh sahifa</a>
+      <a href="#products" onclick="navigate('products')" data-nav="products">Mahsulotlar</a>
+      <a href="#products" onclick="navigate('products')" data-nav="categories">Kategoriyalar</a>
+      <a href="#contact" onclick="navigate('contact')" data-nav="contact">Aloqa</a>
+    </nav>
+    <div class="nav-icons">
+      <button class="icon-btn" title="Qidiruv"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+      <button class="icon-btn" title="Sevimlilar"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-8.5C.8 9 2 5 5.5 5c2 0 3.5 1.2 4.5 3 1-1.8 2.5-3 4.5-3C18 5 19.2 9 17.5 12.5 15 16.65 12 21 12 21z"/></svg></button>
+      <button class="icon-btn" title="Savatcha" onclick="navigate('cart')">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="badge-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HOME PAGE ================= -->
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Bahor-Yoz 2024</div>
+        <h1>Zamonaviy<br><span>Ayollar</span> Uslubi</h1>
+        <p>Eng chiroyli va sifatli kiyimlar faqat siz uchun. Har bir tanlov — zamonaviy ayolning did va erkinligi uchun yaratilgan.</p>
+        <button class="btn btn-primary" onclick="navigate('products')">Koleksiyani ko'rish →</button>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-circle"></div>
+        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=500&q=80" alt="Zamonaviy pushti ko'ylak kiygan ayol">
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="benefits-row">
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div><div><strong>Bepul yetkazib berish</strong><span>200 000 so'mdan yuqori buyurtmalar uchun</span></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg></div><div><strong>Sifat kafolati</strong><span>Faqat original va sifatli mahsulotlar</span></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></div><div><strong>Qulay qaytarish</strong><span>14 kun ichida qaytarish imkoniyati</span></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><div><strong>24/7 qo'llab-quvvatlash</strong><span>Har doim siz uchun xizmatdamiz</span></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <h2>Eng mashhur mahsulotlar</h2>
+        <a class="link-more" href="#products" onclick="navigate('products')">Barchasini ko'rish →</a>
+      </div>
+      <div class="grid-4" id="popularGrid"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="promo">
+      <div>
+        <h2>Yangi kolleksiya</h2>
+        <p>Bahor-Yoz 2024 — nafis va yengil matolardan yaratilgan yangi liniya</p>
+      </div>
+      <button class="btn btn-outline" onclick="navigate('products')">Koleksiyani ko'rish</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS PAGE ================= -->
+<section class="page" id="page-products">
+  <div class="container">
+    <div class="breadcrumb"><a href="#home" onclick="navigate('home')">Bosh sahifa</a> / Mahsulotlar</div>
+    <h1 class="page-title">Mahsulotlar</h1>
+
+    <div class="products-layout">
+      <aside>
+        <div class="filter-block">
+          <h4>Kategoriyalar</h4>
+          <div id="categoryFilters"></div>
+        </div>
+        <div class="filter-block">
+          <h4>Narx</h4>
+          <input type="range" id="priceRange" min="0" max="500000" step="10000" value="500000">
+          <div class="range-labels"><span>0 so'm</span><span id="priceMax">500 000 so'm</span></div>
+        </div>
+        <div class="filter-block">
+          <h4>Rang</h4>
+          <div class="swatches">
+            <div class="swatch" data-color="pink" style="background:#E8AEBB" onclick="toggleColor('pink',this)"></div>
+            <div class="swatch" data-color="beige" style="background:#D8B48C" onclick="toggleColor('beige',this)"></div>
+            <div class="swatch" data-color="tan" style="background:#B0824F" onclick="toggleColor('tan',this)"></div>
+            <div class="swatch" data-color="black" style="background:#242024" onclick="toggleColor('black',this)"></div>
+          </div>
+        </div>
+        <div class="filter-block">
+          <h4>O'lcham</h4>
+          <div class="sizes">
+            <div class="size-chip" onclick="toggleSize('XS',this)">XS</div>
+            <div class="size-chip" onclick="toggleSize('S',this)">S</div>
+            <div class="size-chip" onclick="toggleSize('M',this)">M</div>
+            <div class="size-chip" onclick="toggleSize('L',this)">L</div>
+            <div class="size-chip" onclick="toggleSize('XL',this)">XL</div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="resetFilters()">Filtrni tozalash</button>
+      </aside>
+
+      <div>
+        <div class="results-bar">
+          <span id="resultsCount">Jami 12 ta mahsulot</span>
+          <select class="sort-select" id="sortSelect" onchange="renderProductsPage()">
+            <option value="default">Saralash: Yangiligi</option>
+            <option value="price-asc">Narx: arzondan qimmatga</option>
+            <option value="price-desc">Narx: qimmatdan arzonga</option>
+          </select>
+        </div>
+        <div class="grid-3" id="productsGrid"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCT DETAIL PAGE ================= -->
+<section class="page" id="page-detail">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="#home" onclick="navigate('home')">Bosh sahifa</a> / <a href="#products" onclick="navigate('products')">Mahsulotlar</a> / <span id="detailBreadcrumb"></span>
+    </div>
+
+    <div class="detail-grid">
+      <div class="thumbs" id="detailThumbs"></div>
+      <div class="main-image"><img id="detailMainImage" src="" alt=""></div>
+      <div class="detail-info" id="detailInfo"></div>
+    </div>
+
+    <div class="lower-grid">
+      <div>
+        <h3>Tavsif</h3>
+        <p class="detail-desc" id="detailLongDesc"></p>
+        <table class="spec-table" id="specTable"></table>
+      </div>
+      <div>
+        <h3>O'xshash mahsulotlar</h3>
+        <div class="similar-grid" id="similarGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CART PAGE ================= -->
+<section class="page" id="page-cart">
+  <div class="container">
+    <div class="breadcrumb"><a href="#home" onclick="navigate('home')">Bosh sahifa</a> / Savatcha</div>
+    <h1 class="page-title">Savatcha</h1>
+    <div id="cartContent" class="cart-layout"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT PAGE ================= -->
+<section class="page" id="page-contact">
+  <div class="container">
+    <div class="breadcrumb"><a href="#home" onclick="navigate('home')">Bosh sahifa</a> / Aloqa</div>
+    <h1 class="page-title">Aloqa</h1>
+    <div class="contact-layout">
+      <div>
+        <div class="contact-info-item">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div><strong>Manzil</strong><span>Toshkent, Chilonzor tumani,<br>Bunyodkor ko'chasi 123</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8 10.1a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.6 2z"/></svg></div>
+          <div><strong>Telefon</strong><span>+998 90 123 45 67</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 3L11 14"/><path d="M22 3l-7 19-4-9-9-4z"/></svg></div>
+          <div><strong>Telegram</strong><span>@belleza_shop</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg></div>
+          <div><strong>Email</strong><span>info@belleza.uz</span></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <div><strong>Ish vaqti</strong><span>Har kuni 09:00 - 21:00</span></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form onsubmit="submitContact(event)">
+          <div class="field"><label>Ismingiz</label><input type="text" required placeholder="Ismingizni kiriting"></div>
+          <div class="field"><label>Telefon raqamingiz</label><input type="tel" required placeholder="+998 90 123 45 67"></div>
+          <div class="field"><label>Xabar</label><textarea rows="5" required placeholder="Xabaringizni yozing..."></textarea></div>
+          <button class="btn btn-primary btn-block" type="submit">Yuborish</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff; margin-bottom:14px;">
+          <span class="logo-mark"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#E14D6A" stroke-width="1.6"><path d="M9 3l3 3 3-3M9 3c0 3-1 4-3 6l-3 12h18l-3-12c-2-2-3-3-3-6"/></svg></span>
+          Belleza
+        </div>
+        <p>Zamonaviy ayollar uchun sifatli va nafis kiyimlar. 2024-yildan beri did va qulaylikni birlashtiramiz.</p>
+      </div>
+      <div><h4>Do'kon</h4><ul><li onclick="navigate('home')" style="cursor:pointer">Bosh sahifa</li><li onclick="navigate('products')" style="cursor:pointer">Mahsulotlar</li><li onclick="navigate('cart')" style="cursor:pointer">Savatcha</li></ul></div>
+      <div><h4>Yordam</h4><ul><li onclick="navigate('contact')" style="cursor:pointer">Aloqa</li><li>Yetkazib berish</li><li>Qaytarish shartlari</li></ul></div>
+      <div><h4>Ijtimoiy tarmoqlar</h4><ul><li>Instagram</li><li>Telegram</li><li>Facebook</li></ul></div>
+    </div>
+    <div class="footer-bottom">© 2024 Belleza. Barcha huquqlar himoyalangan.</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================== DATA ===================== */
+const products = [
+  {id:1, name:"Pushti ko'ylak", cat:"koylaklar", price:350000, oldPrice:450000, badge:"new", color:"pink", sizes:["XS","S","M","L"], rating:4.8, reviews:12, img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80", desc:"Zamonaviy dizayndagi pushti ko'ylak. Yuqori sifatli matodan tikilgan, har kuni va maxsus kunlar uchun mos."},
+  {id:2, name:"Bej ko'ylak", cat:"koylaklar", price:350000, badge:"new", color:"beige", sizes:["S","M","L","XL"], rating:4.6, reviews:9, img:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&q=80", desc:"Yengil va nafis bej rangdagi kunlik ko'ylak. Har qanday tanaga mos tushadigan erkin fason."},
+  {id:3, name:"Qora ko'ylak", cat:"koylaklar", price:420000, badge:"new", color:"black", sizes:["XS","S","M"], rating:4.9, reviews:21, img:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&q=80", desc:"Klassik qora ko'ylak — kechki tadbirlar va ish uchrashuvlari uchun ideal tanlov."},
+  {id:4, name:"Bej kostyum", cat:"kostyumlar", price:450000, badge:null, color:"beige", sizes:["S","M","L"], rating:4.7, reviews:15, img:"https://images.unsplash.com/photo-1548126032-079a0fb0099d?w=500&q=80", desc:"Ikki qismli bej kostyum, ofis va rasmiy uchrashuvlar uchun qulay va zamonaviy."},
+  {id:5, name:"Oq bluzka", cat:"bluzkalar", price:180000, badge:null, color:"black", sizes:["XS","S","M","L","XL"], rating:4.5, reviews:33, img:"https://images.unsplash.com/photo-1551163943-3f6a855d1153?w=500&q=80", desc:"Klassik oq bluzka — har qanday garderobning asosiy qismi. Nafis va qulay mato."},
+  {id:6, name:"Bej kostyum shim", cat:"kostyumlar", price:450000, oldPrice:550000, badge:"sale", color:"tan", sizes:["M","L","XL"], rating:4.6, reviews:8, img:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&q=80", desc:"Zamonaviy shim-kostyum, ofis kiyimlari orasida eng amaliy va nafis tanlov."},
+  {id:7, name:"Gulli ko'ylak", cat:"koylaklar", price:320000, badge:"new", color:"pink", sizes:["XS","S","M","L"], rating:4.7, reviews:11, img:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=500&q=80", desc:"Yorqin gulli naqshli yengil ko'ylak, bahor-yoz mavsumi uchun ajoyib tanlov."},
+  {id:8, name:"Qora shim", cat:"shimlar", price:220000, badge:null, color:"black", sizes:["S","M","L","XL"], rating:4.4, reviews:19, img:"https://images.unsplash.com/photo-1594633313593-bab3825d0caf?w=500&q=80", desc:"Klassik qora shim, kunlik va ish kiyimlari bilan mukammal uyg'unlashadi."},
+  {id:9, name:"Pushti yubka", cat:"yubkalar", price:210000, badge:"new", color:"pink", sizes:["XS","S","M"], rating:4.5, reviews:6, img:"https://images.unsplash.com/photo-1583496661160-fb5886a13d59?w=500&q=80", desc:"Yengil pushti yubka, yozgi kunlar uchun qulay va sarishta ko'rinish beradi."},
+  {id:10, name:"Bej palto", cat:"kostyumlar", price:520000, oldPrice:620000, badge:"sale", color:"tan", sizes:["M","L","XL"], rating:4.8, reviews:14, img:"https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=500&q=80", desc:"Iliq va nafis bej palto, kuz-qish mavsumi uchun asosiy ustki kiyim."},
+  {id:11, name:"Chiziqli bluzka", cat:"bluzkalar", price:195000, badge:null, color:"black", sizes:["XS","S","M","L"], rating:4.3, reviews:7, img:"https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=500&q=80", desc:"Zamonaviy chiziqli bluzka, kundalik va yarim rasmiy uchrashuvlar uchun qulay."},
+  {id:12, name:"Aksessuar sumka", cat:"aksessuarlar", price:280000, badge:"new", color:"tan", sizes:["S"], rating:4.9, reviews:24, img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80", desc:"Charm sumka, har qanday obraz uchun nafis va amaliy aksessuar."},
+];
+
+const categories = [
+  {id:"all", name:"Barchasi", count:products.length},
+  {id:"koylaklar", name:"Ko'ylaklar", count:products.filter(p=>p.cat==='koylaklar').length},
+  {id:"kostyumlar", name:"Kostyumlar", count:products.filter(p=>p.cat==='kostyumlar').length},
+  {id:"bluzkalar", name:"Bluzkalar", count:products.filter(p=>p.cat==='bluzkalar').length},
+  {id:"shimlar", name:"Shimlar", count:products.filter(p=>p.cat==='shimlar').length},
+  {id:"yubkalar", name:"Yubkalar", count:products.filter(p=>p.cat==='yubkalar').length},
+  {id:"aksessuarlar", name:"Aksessuarlar", count:products.filter(p=>p.cat==='aksessuarlar').length},
+];
+
+const colorHex = {pink:"#E8AEBB", beige:"#D8B48C", tan:"#B0824F", black:"#242024"};
+
+let filters = { cat:"all", maxPrice:500000, colors:[], sizes:[] };
+let currentPage = 1;
+const perPage = 6;
+let currentDetailId = 1;
+let selectedSize = null;
+let selectedQty = 1;
+
+/* ===================== HELPERS ===================== */
+function fmt(n){ return n.toLocaleString('uz-UZ').replace(/,/g,' ') + " so'm"; }
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function getCart(){ return JSON.parse(localStorage.getItem('belleza_cart') || '[]'); }
+function setCart(c){ localStorage.setItem('belleza_cart', JSON.stringify(c)); updateCartCount(); }
+function updateCartCount(){
+  const c = getCart();
+  const count = c.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent = count;
+}
+function addToCart(productId, size, qty){
+  const cart = getCart();
+  const existing = cart.find(i=>i.id===productId && i.size===size);
+  if(existing){ existing.qty += qty; } else { cart.push({id:productId, size:size||'M', qty}); }
+  setCart(cart);
+  showToast("Savatchaga qo'shildi ✓");
+}
+function removeFromCart(idx){
+  const cart = getCart();
+  cart.splice(idx,1);
+  setCart(cart);
+  renderCartPage();
+}
+function changeCartQty(idx, delta){
+  const cart = getCart();
+  cart[idx].qty = Math.max(1, cart[idx].qty + delta);
+  setCart(cart);
+  renderCartPage();
+}
+
+/* ===================== NAVIGATION ===================== */
+function navigate(page, id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('[data-nav]').forEach(n=>n.classList.remove('active'));
+  const navMap = {home:'home', products:'products', detail:'products', cart:null, contact:'contact'};
+  const navKey = navMap[page];
+  if(navKey){ document.querySelectorAll(`[data-nav="${navKey}"]`).forEach(n=>n.classList.add('active')); }
+  window.scrollTo({top:0, behavior:'smooth'});
+  location.hash = page;
+
+  if(page==='products') renderProductsPage();
+  if(page==='detail'){ if(id) currentDetailId = id; renderDetailPage(currentDetailId); }
+  if(page==='cart') renderCartPage();
+}
+
+/* ===================== RENDER: PRODUCT CARD ===================== */
+function productCard(p){
+  const badgeHtml = p.badge==='new' ? `<span class="tag new">Yangi</span>` : p.badge==='sale' ? `<span class="tag sale">Aksiya</span>` : '';
+  return `
+  <div class="card" onclick="navigate('detail', ${p.id})">
+    <div class="card-media">
+      ${badgeHtml}
+      <button class="fav-btn" onclick="event.stopPropagation(); this.classList.toggle('active')">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.35-9.5-8.5C.8 9 2 5 5.5 5c2 0 3.5 1.2 4.5 3 1-1.8 2.5-3 4.5-3C18 5 19.2 9 17.5 12.5 15 16.65 12 21 12 21z"/></svg>
+      </button>
+      <img src="${p.img}" alt="${p.name}">
+    </div>
+    <div class="card-body">
+      <h3>${p.name}</h3>
+      <div class="price-row">
+        <div>
+          <span class="price ${p.oldPrice?'discounted':''}">${fmt(p.price)}</span>
+          ${p.oldPrice ? `<span class="old-price">${fmt(p.oldPrice)}</span>` : ''}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPopular(){
+  const popular = products.slice(0,4);
+  document.getElementById('popularGrid').innerHTML = popular.map(productCard).join('');
+}
+
+/* ===================== RENDER: PRODUCTS PAGE ===================== */
+function renderCategoryFilters(){
+  document.getElementById('categoryFilters').innerHTML = categories.map(c=>`
+    <div class="cat-item ${filters.cat===c.id?'active':''}" onclick="setCategory('${c.id}')">
+      <span>${c.name}</span><span>(${c.count})</span>
+    </div>`).join('');
+}
+function setCategory(id){ filters.cat=id; currentPage=1; renderProductsPage(); }
+function toggleColor(color, el){
+  if(filters.colors.includes(color)){ filters.colors = filters.colors.filter(c=>c!==color); el.classList.remove('selected'); }
+  else { filters.colors.push(color); el.classList.add('selected'); }
+  currentPage=1; renderProductsPage();
+}
+function toggleSize(size, el){
+  if(filters.sizes.includes(size)){ filters.sizes = filters.sizes.filter(s=>s!==size); el.classList.remove('selected'); }
+  else { filters.sizes.push(size); el.classList.add('selected'); }
+  currentPage=1; renderProductsPage();
+}
+document.addEventListener('input', e=>{
+  if(e.target.id==='priceRange'){
+    filters.maxPrice = parseInt(e.target.value);
+    document.getElementById('priceMax').textContent = fmt(filters.maxPrice);
+    currentPage=1;
+    renderProductsPage();
+  }
+});
+function resetFilters(){
+  filters = { cat:"all", maxPrice:500000, colors:[], sizes:[] };
+  currentPage=1;
+  document.getElementById('priceRange').value = 500000;
+  document.getElementById('priceMax').textContent = fmt(500000);
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('selected'));
+  document.querySelectorAll('.size-chip').forEach(s=>s.classList.remove('selected'));
+  renderProductsPage();
+}
+function getFilteredProducts(){
+  let list = products.filter(p=>{
+    if(filters.cat!=='all' && p.cat!==filters.cat) return false;
+    if(p.price > filters.maxPrice) return false;
+    if(filters.colors.length && !filters.colors.includes(p.color)) return false;
+    if(filters.sizes.length && !p.sizes.some(s=>filters.sizes.includes(s))) return false;
+    return true;
+  });
+  const sort = document.getElementById('sortSelect') ? document.getElementById('sortSelect').value : 'default';
+  if(sort==='price-asc') list = list.slice().sort((a,b)=>a.price-b.price);
+  if(sort==='price-desc') list = list.slice().sort((a,b)=>b.price-a.price);
+  return list;
+}
+function renderProductsPage(){
+  renderCategoryFilters();
+  const filtered = getFilteredProducts();
+  document.getElementById('resultsCount').textContent = `Jami ${filtered.length} ta mahsulot`;
+  const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+  if(currentPage>totalPages) currentPage = totalPages;
+  const pageItems = filtered.slice((currentPage-1)*perPage, currentPage*perPage);
+  document.getElementById('productsGrid').innerHTML = pageItems.length ? pageItems.map(productCard).join('') : `<p style="color:var(--muted); padding:40px 0;">Mos mahsulot topilmadi.</p>`;
+
+  let pagHtml = `<button class="page-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+  for(let i=1;i<=totalPages;i++){ pagHtml += `<button class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</button>`; }
+  pagHtml += `<button class="page-btn" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`;
+  document.getElementById('pagination').innerHTML = pagHtml;
+}
+function changePage(p){
+  const filtered = getFilteredProducts();
+  const totalPages = Math.max(1, Math.ceil(filtered.length / perPage));
+  if(p<1||p>totalPages) return;
+  currentPage = p;
+  renderProductsPage();
+  document.querySelector('.products-layout').scrollIntoView({behavior:'smooth'});
+}
+
+/* ===================== RENDER: DETAIL PAGE ===================== */
+function renderDetailPage(id){
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  selectedSize = p.sizes[Math.floor(p.sizes.length/2)];
+  selectedQty = 1;
+  document.getElementById('detailBreadcrumb').textContent = p.name;
+  document.getElementById('detailMainImage').src = p.img;
+  document.getElementById('detailMainImage').alt = p.name;
+  document.getElementById('detailThumbs').innerHTML = [p.img,p.img,p.img].map((img,i)=>`<div class="thumb ${i===0?'selected':''}" onclick="document.getElementById('detailMainImage').src='${img}'; document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('selected')); this.classList.add('selected')"><img src="${img}"></div>`).join('');
+
+  const stars = '★'.repeat(Math.round(p.rating)) + '☆'.repeat(5-Math.round(p.rating));
+  document.getElementById('detailInfo').innerHTML = `
+    <h1>${p.name}</h1>
+    <div class="rating">${stars} <span>(${p.reviews} ta sharh)</span></div>
+    <div class="detail-price">${fmt(p.price)} ${p.oldPrice?`<span class="old-price">${fmt(p.oldPrice)}</span>`:''}</div>
+    <p class="detail-desc">${p.desc}</p>
+    <div class="opt-block">
+      <h4>O'lcham</h4>
+      <div class="sizes" id="detailSizes">
+        ${p.sizes.map(s=>`<div class="size-chip ${s===selectedSize?'selected':''}" onclick="selectDetailSize('${s}', this)">${s}</div>`).join('')}
+      </div>
+    </div>
+    <div class="opt-block">
+      <h4>Rang</h4>
+      <div class="swatches"><div class="swatch selected" style="background:${colorHex[p.color]}"></div></div>
+    </div>
+    <div class="opt-block">
+      <h4>Miqdor</h4>
+      <div class="qty-control">
+        <button onclick="changeDetailQty(-1)">−</button>
+        <span id="detailQty">1</span>
+        <button onclick="changeDetailQty(1)">+</button>
+      </div>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-primary" style="flex:1" onclick="addToCart(${p.id}, selectedSize, selectedQty)">Savatchaga qo'shish</button>
+      <button class="btn btn-outline" onclick="this.classList.toggle('active'); showToast('Sevimlilarga qo\\'shildi ✓')">♡ Sevimlilarga qo'shish</button>
+    </div>
+    <div class="detail-benefits">
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="1" y="7" width="15" height="10" rx="1"/><path d="M16 10h4l3 3v4h-7z"/></svg></div><div><strong style="font-size:13px">Bepul yetkazib berish</strong><span style="font-size:11.5px">200 000 so'mdan yuqori</span></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7M21 3v6h-6"/></svg></div><div><strong style="font-size:13px">14 kun ichida qaytarish</strong><span style="font-size:11.5px">Qaytarish kafolati</span></div></div>
+      <div class="benefit"><div class="benefit-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><strong style="font-size:13px">Xavfsiz to'lov</strong><span style="font-size:11.5px">100% himoyalangan</span></div></div>
+    </div>
+  `;
+
+  document.getElementById('detailLongDesc').textContent = p.desc + " Har kuni va maxsus kunlar uchun mos, yumshoq va qulay.";
+  document.getElementById('specTable').innerHTML = `
+    <tr><td>Mato</td><td>Shifon</td></tr>
+    <tr><td>Mavsum</td><td>Bahor / Yoz</td></tr>
+    <tr><td>Ishlab chiqarilgan mamlakat</td><td>O'zbekiston</td></tr>
+    <tr><td>Uslub</td><td>Kundalik / Klassik</td></tr>
+  `;
+
+  const similar = products.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,2);
+  document.getElementById('similarGrid').innerHTML = similar.map(productCard).join('') || products.filter(x=>x.id!==p.id).slice(0,2).map(productCard).join('');
+}
+function selectDetailSize(s, el){ selectedSize = s; document.querySelectorAll('#detailSizes .size-chip').forEach(c=>c.classList.remove('selected')); el.classList.add('selected'); }
+function changeDetailQty(delta){ selectedQty = Math.max(1, selectedQty+delta); document.getElementById('detailQty').textContent = selectedQty; }
+
+/* ===================== RENDER: CART PAGE ===================== */
+function renderCartPage(){
+  const cart = getCart();
+  const container = document.getElementById('cartContent');
+  if(!cart.length){
+    container.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <h3 style="margin-bottom:8px;">Savatchangiz bo'sh</h3>
+      <p style="color:var(--muted); margin-bottom:20px;">Hozircha hech qanday mahsulot qo'shilmagan</p>
+      <button class="btn btn-primary" onclick="navigate('products')">Xarid qilishni boshlash</button>
+    </div>`;
+    return;
+  }
+  let total = 0;
+  const rows = cart.map((item,idx)=>{
+    const p = products.find(x=>x.id===item.id);
+    const sum = p.price * item.qty;
+    total += sum;
+    return `<tr>
+      <td><div class="cart-product"><img src="${p.img}"><div><strong style="display:block">${p.name}</strong><span style="color:var(--muted); font-size:12.5px">O'lcham: ${item.size}</span></div></div></td>
+      <td>${fmt(p.price)}</td>
+      <td><div class="qty-mini"><button onclick="changeCartQty(${idx},-1)">−</button><span>${item.qty}</span><button onclick="changeCartQty(${idx},1)">+</button></div></td>
+      <td>${fmt(sum)}</td>
+      <td><span class="remove-btn" onclick="removeFromCart(${idx})">✕</span></td>
+    </tr>`;
+  }).join('');
+
+  container.innerHTML = `
+    <table class="cart-table">
+      <thead><tr><th>Mahsulot</th><th>Narx</th><th>Miqdor</th><th>Jami</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="summary-card">
+      <h3>Buyurtma haqida</h3>
+      <div class="summary-row"><span>Jami</span><span>${fmt(total)}</span></div>
+      <div class="summary-row"><span>Yetkazib berish</span><span>${total>=200000 ? 'Bepul' : fmt(20000)}</span></div>
+      <div class="summary-row total"><span>Umumiy</span><span>${fmt(total>=200000?total:total+20000)}</span></div>
+      <button class="btn btn-primary btn-block" style="margin-top:18px" onclick="placeOrder()">Buyurtma berish</button>
+      <button class="btn btn-outline btn-block" style="margin-top:10px" onclick="navigate('products')">Davom ettirish</button>
+    </div>
+  `;
+}
+function placeOrder(){
+  setCart([]);
+  showToast("Buyurtma qabul qilindi! Tez orada bog'lanamiz ✓");
+  navigate('home');
+}
+function submitContact(e){
+  e.preventDefault();
+  showToast("Xabaringiz yuborildi ✓");
+  e.target.reset();
+}
+
+/* ===================== INIT ===================== */
+renderPopular();
+updateCartCount();
+const startPage = (location.hash || '#home').replace('#','');
+navigate(['home','products','detail','cart','contact'].includes(startPage) ? startPage : 'home');
+</script>
+</body>
+</html>
